@@ -101,8 +101,8 @@ public class ChildDAOImpl implements ChildDAO {
 	            ps.setString(10, child.getMotherName());
 	            ps.setString(11, child.getMotherEducation());
 	            ps.setString(12, child.getMotherEmployment());
-	            ps.setString(13, child.getFamilyHistroy());
-	            ps.setString(14, child.getAddess());
+	            ps.setString(13, child.getFamilyHistory());
+	            ps.setString(14, child.getAddress());
 	            ps.setInt(15, child.getFamilyIncome());
 	            ps.setString(16, child.getCategory());
 	            ps.setInt(17, child.getHivInfection());

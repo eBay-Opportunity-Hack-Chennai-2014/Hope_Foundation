@@ -4,18 +4,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Donation Page</title>
 </head>
 <body>
-	<form action="makeDonation" method="POST">
-		<h3>Needs</h3>
-		Food : <input name="food" type="text"/>
-		Clothing : <input name="clothing" type="text"/>
-		Medical : <input name="medical" type="text"/>
-		Education : <input name="education" type="text"/>
-		<h3>Wishes</h3>
-		Wish-Desc : <input name="wish-id" type="text"/>
-		<input type="submit" name="Submit" />
-	</form>
+       <form action="makeDonation" method="POST">
+       		  <input name="donorid" value="1" type="hidden">
+       		  <input name="childid" value="1" type="hidden">	
+              <h3>Needs</h3>
+              Food : <input name="food" type="text"/>
+              Clothing : <input name="clothing" type="text"/>
+              Medical : <input name="medical" type="text"/>
+              Education : <input name="education" type="text"/>
+              <!-- <h3>Wishes</h3>
+              Wish-Desc : <input name="wish-id" type="text"/> -->
+              <input type="submit" name="Submit" />
+       </form>
 </body>
 </html>
+

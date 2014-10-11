@@ -1,3 +1,4 @@
+
 <jsp:include page="header.jsp"></jsp:include>
 	<c:forEach var="child" items="${children}">
 	   <p>${child.getName()}</p>

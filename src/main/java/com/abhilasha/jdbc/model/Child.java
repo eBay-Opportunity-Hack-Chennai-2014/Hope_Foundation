@@ -14,8 +14,8 @@ public class Child {
 	private String motherName;
 	private String motherEducation;
 	private String motherEmployment;
-	private String familyHistroy;
-	private String addess;
+	private String familyHistory;
+	private String address;
 	private int familyIncome;
 	private String category;//orphan/semi-orphan/poor family
 	private int hivInfection;
@@ -37,7 +37,7 @@ public class Child {
 			String motherName,
 			String motherEducation,
 			String motherEmployment,
-			String familyHistroy,
+			String familyHistory,
 			String addess,
 			int familyIncome,
 			String category,
@@ -59,8 +59,8 @@ public class Child {
 		this.motherName = motherName;
 		this.motherEducation = motherEducation;
 		this.motherEmployment = motherEmployment;
-		this.familyHistroy = familyHistroy;
-		this.addess = addess;
+		this.familyHistory = familyHistory;
+		this.address = addess;
 		this.familyIncome = familyIncome;
 		this.category = category;
 		this.hivInfection = hivInfection;
@@ -149,17 +149,17 @@ public class Child {
 	public void setMotherEmployment(String motherEmployment) {
 		this.motherEmployment = motherEmployment;
 	}
-	public String getFamilyHistroy() {
-		return familyHistroy;
+	public String getFamilyHistory() {
+		return familyHistory;
 	}
-	public void setFamilyHistroy(String familyHistroy) {
-		this.familyHistroy = familyHistroy;
+	public void setFamilyHistory(String familyHistory) {
+		this.familyHistory = familyHistory;
 	}
-	public String getAddess() {
-		return addess;
+	public String getAddress() {
+		return address;
 	}
-	public void setAddess(String addess) {
-		this.addess = addess;
+	public void setAddress(String addess) {
+		this.address = addess;
 	}
 	public int getFamilyIncome() {
 		return familyIncome;

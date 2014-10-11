@@ -35,10 +35,9 @@ public class HomeController {
 
 	@Autowired
 	ChildDAO childDAO;
-	
+
 	@Autowired
 	ChildNeedDAO childNeedDAO;
-	
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -104,13 +103,14 @@ public class HomeController {
 			return "childCreatedFail";
 		}
 	}
-	
+
 	@RequestMapping(value = "/getAllChildren", method = RequestMethod.GET)
-	public String getAllChildren() {
+	public String getAllChildren(Model model) {
 		ArrayList<Child> children = childDAO.getAllChildren();
 		for (Child child : children) {
 			System.out.println(child.getName());
 		}
-		return null;
+		model.addAttribute(children);
+		return "displayChildren";
 	}
 }

@@ -134,7 +134,7 @@ public class ChildDAOImpl implements ChildDAO {
 					rs.getString("mothereducation"),
 					rs.getString("motheremployment"),
 					rs.getString("familyhistory"),
-					rs.getString("addess"),
+					rs.getString("address"),
 					rs.getInt("familyincome"),
 					rs.getString("category"),
 					rs.getInt("hivinfection"),

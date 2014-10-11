@@ -148,7 +148,12 @@ public class HomeController {
 		for (Child child : children) {
 			System.out.println(child.getName());
 		}
-		model.addAttribute(children);
+		model.addAttribute("children", children);
 		return "displayChildren";
+	}
+	
+	@RequestMapping(value = "/donorRegister", method = RequestMethod.GET)
+	public String donorRegister() {
+		return "donorRegistration";
 	}
 }

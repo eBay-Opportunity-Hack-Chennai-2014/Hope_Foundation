@@ -1,7 +1,5 @@
 package com.abhilasha.jdbc.dao;
 
-import java.util.ArrayList;
-
 import com.abhilasha.jdbc.model.ChildNeed;
 
 public interface ChildNeedDAO {

@@ -1,6 +1,7 @@
 package com.abhilasha.api;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.abhilasha.jdbc.dao.ChildDAO;
+import com.abhilasha.jdbc.dao.ChildNeedDAO;
 import com.abhilasha.jdbc.dao.DonorDAO;
 import com.abhilasha.jdbc.model.Child;
+import com.abhilasha.jdbc.model.ChildNeed;
 import com.abhilasha.jdbc.model.Donor;
 
 /**
@@ -32,6 +35,10 @@ public class HomeController {
 
 	@Autowired
 	ChildDAO childDAO;
+	
+	@Autowired
+	ChildNeedDAO childNeedDAO;
+	
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {

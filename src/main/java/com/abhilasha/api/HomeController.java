@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.abhilasha.bo.ChildBO;
 import com.abhilasha.jdbc.dao.ChildDAO;
 import com.abhilasha.jdbc.dao.ChildNeedDAO;
 import com.abhilasha.jdbc.dao.DonorDAO;
@@ -48,6 +49,9 @@ public class HomeController {
 
 	@Autowired
 	ChildNeedDAO childNeedDAO;
+	
+	@Autowired
+	ChildBO childBO;
 
 	private String imageDir = "C:\\Users\\vijmkumar\\abhilasha\\abhilasha\\src\\main\\webapp\\resources\\dp\\";
 

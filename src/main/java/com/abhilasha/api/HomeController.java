@@ -3,11 +3,17 @@ package com.abhilasha.api;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.abhilasha.jdbc.dao.ChildDAO;
 import com.abhilasha.jdbc.dao.ChildNeedDAO;
+import com.abhilasha.jdbc.dao.DonationDAO;
 import com.abhilasha.jdbc.dao.DonorDAO;
+import com.abhilasha.jdbc.dao.impl.DonationDAOImpl;
 import com.abhilasha.jdbc.model.Child;
 import com.abhilasha.jdbc.model.ChildNeed;
+import com.abhilasha.jdbc.model.Donation;
 import com.abhilasha.jdbc.model.Donor;
 
 /**
@@ -38,11 +47,73 @@ public class HomeController {
 
 	@Autowired
 	ChildNeedDAO childNeedDAO;
+	
+	@Autowired
+	DonationDAO donationDAO;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		return "index";
+		return "donate";
 	}
+	
+	
+	@RequestMapping(value = "/makeDonation", method = RequestMethod.POST)
+	public String makeDonation(
+			HttpServletRequest request,
+			Model model) {
+		Enumeration<String> names = request.getParameterNames();
+		int donorId = Integer.parseInt(request.getParameter("donorid"));
+		int childId = Integer.parseInt(request.getParameter("childid"));;
+		int amount = 0;
+		Date date = new Date();
+		ArrayList<Donation> needs = new ArrayList<Donation>();
+		while(names.hasMoreElements()) {
+			String name = names.nextElement();
+			if (name.equals("donorid")) {
+				//do nothing
+			} else if (name.equals("childid")) {
+				//do nothing
+			} else if (name.equals("food")) {
+				if (request.getParameter("food") != "") {
+					    amount = Integer.parseInt(request.getParameter("food"));
+					} else {
+						amount = 0;
+					}
+				 needs.add(new Donation(donorId, childId, 1, date.toString(), amount));
+			} else if (name.equals("clothing")) {
+				if (request.getParameter("clothing") != "") {
+				    amount = Integer.parseInt(request.getParameter("clothing"));
+				} else {
+					amount = 0;
+				}
+				 needs.add(new Donation(donorId, childId, 4, date.toString(), amount));
+			} else if (name.equals("medical")) {
+				if (request.getParameter("medical") != "") {
+				    amount = Integer.parseInt(request.getParameter("medical"));
+				} else {
+					amount = 0;
+				}
+				 needs.add(new Donation(donorId, childId, 3, date.toString(), amount));
+			} else if (name.equals("education")) {
+				if (request.getParameter("education") != "") {
+				    amount = Integer.parseInt(request.getParameter("education"));
+				} else {
+					amount = 0;
+				}
+				 needs.add(new Donation(donorId, childId, 2, date.toString(), amount));
+			} else {
+				//add to wish table
+			}
+		}
+		for (int i = 0; i < needs.size(); i++) {
+			if (needs.get(i).getAmountdonated() > 0) {
+			Donation donation = donationDAO.save(needs.get(i));
+			System.out.println(donation.getId());
+			}
+		}
+		return "donationSuccess";
+	}
+	
 
 	@RequestMapping(value = "/registerDonor", method = RequestMethod.POST)
 	public String createDonor(
@@ -110,7 +181,7 @@ public class HomeController {
 		for (Child child : children) {
 			System.out.println(child.getName());
 		}
-		model.addAttribute(children);
+		model.addAttribute("children", children);
 		return "displayChildren";
 	}
 }

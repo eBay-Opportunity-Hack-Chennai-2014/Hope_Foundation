@@ -10,6 +10,11 @@ public class ChildNeed {
 	public ChildNeed (int childid) {
 		this.childid = childid;
 	}
+	
+	public ChildNeed(int childId, ArrayList<Integer> needid) {
+		this.childid = childId;
+		this.needid = needid;
+	}
 
 	public int getChildid() {
 		return childid;

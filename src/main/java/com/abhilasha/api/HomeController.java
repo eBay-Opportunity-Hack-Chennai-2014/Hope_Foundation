@@ -1,9 +1,14 @@
 package com.abhilasha.api;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+
+import javax.servlet.ServletContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.abhilasha.jdbc.dao.ChildDAO;
 import com.abhilasha.jdbc.dao.ChildNeedDAO;
@@ -30,6 +36,9 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory
 			.getLogger(HomeController.class);
 
+	@Autowired
+	ServletContext servletContext;
+	
 	@Autowired
 	DonorDAO donorDAO;
 
@@ -103,6 +112,35 @@ public class HomeController {
 			return "childCreatedFail";
 		}
 	}
+	
+	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+	public boolean uploadFileHandler(@RequestParam("name") String name,
+			@RequestParam("file") MultipartFile file) {
+
+		if (!file.isEmpty()) {
+			try {
+				byte[] bytes = file.getBytes();
+
+				// Creating the directory to store file
+				String imagesStore = servletContext.getRealPath("/")
+						+ File.separator + "src" + File.separator + "main"
+						+ File.separator + "resources" + File.separator
+						+ "images";
+
+				// Create the file on server
+				File serverFile = new File(imagesStore + File.separator + name);
+				BufferedOutputStream stream = new BufferedOutputStream(
+						new FileOutputStream(serverFile));
+				stream.write(bytes);
+				stream.close();
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
+		}
+		return false;
+	}
+
 
 	@RequestMapping(value = "/getAllChildren", method = RequestMethod.GET)
 	public String getAllChildren(Model model) {

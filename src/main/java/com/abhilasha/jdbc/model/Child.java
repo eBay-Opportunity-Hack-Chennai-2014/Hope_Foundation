@@ -6,7 +6,7 @@ public class Child {
 	private String admissionNumber;
 	private String dob;
 	private int age;
-	private boolean sex ;
+	private int sex ;
 	private String std;
 	private String fatherName;
 	private String fatherEducation;
@@ -17,13 +17,59 @@ public class Child {
 	private String familyHistroy;
 	private String addess;
 	private int familyIncome;
-	private String category;
+	private String category;//orphan/semi-orphan/poor family
 	private int hivInfection;
 	private int parentsHadhiv;
 	private String conduct;
 	private String academicPerformance;
 	private String dream;
 	private String schoolImpact;
+	
+	public Child(String name,
+			String admissionNumber,
+			String dob,
+			int age,
+			int sex ,
+			String std,
+			String fatherName,
+			String fatherEducation,
+			String fatherEmployment,
+			String motherName,
+			String motherEducation,
+			String motherEmployment,
+			String familyHistroy,
+			String addess,
+			int familyIncome,
+			String category,
+			int hivInfection,
+			int parentsHadhiv,
+			String conduct,
+			String academicPerformance,
+			String dream,
+			String schoolImpact) {
+		this.name = name;
+		this.admissionNumber = admissionNumber;
+		this.dob = dob;
+		this.age = age;
+		this.sex = sex ;
+		this.std = std;
+		this.fatherName = fatherName;
+		this.fatherEducation = fatherEducation;
+		this.fatherEmployment = fatherEmployment;
+		this.motherName = motherName;
+		this.motherEducation = motherEducation;
+		this.motherEmployment = motherEmployment;
+		this.familyHistroy = familyHistroy;
+		this.addess = addess;
+		this.familyIncome = familyIncome;
+		this.category = category;
+		this.hivInfection = hivInfection;
+		this.parentsHadhiv = parentsHadhiv;
+		this.conduct = conduct;
+		this.academicPerformance = academicPerformance;
+		this.dream = dream;
+		this.schoolImpact = schoolImpact;
+	}
 	
 	public int getId() {
 		return id;
@@ -55,10 +101,10 @@ public class Child {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	public boolean isSex() {
+	public int getSex() {
 		return sex;
 	}
-	public void setSex(boolean sex) {
+	public void setSex(int sex) {
 		this.sex = sex;
 	}
 	public String getStd() {

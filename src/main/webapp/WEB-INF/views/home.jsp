@@ -8,7 +8,7 @@
 <h1>
 	Create Donor
 </h1>
-	<form action="registerDonor">
+	<form action="registerDonor" method="POST">
 		Name : <input type="text" name="name"/><br/>
 		DOB : <input type="text" name="dob"/><br/>
 		Address: <input type="text" name="address"/><br/>

@@ -104,4 +104,13 @@ public class HomeController {
 			return "childCreatedFail";
 		}
 	}
+	
+	@RequestMapping(value = "/getAllChildren", method = RequestMethod.GET)
+	public String getAllChildren() {
+		ArrayList<Child> children = childDAO.getAllChildren();
+		for (Child child : children) {
+			System.out.println(child.getName());
+		}
+		return null;
+	}
 }

@@ -8,15 +8,14 @@
 <h1>
 	Create Donor
 </h1>
-	<form action="createDonor">
+	<form action="registerDonor">
 		Name : <input type="text" name="name"/><br/>
+		DOB : <input type="text" name="dob"/><br/>
 		Address: <input type="text" name="address"/><br/>
-		City : <input type="text" name="city"/><br/>
-		State : <input type="text" name="state"/><br/>
-		Country : <input type="text" name="country"/><br/>
 		Mobile : <input type="text" name="mobile"/><br/>
+		Ph No Res : <input type="text" name="phNoRes"/><br/>
+		Ph No Ofc : <input type="text" name="phNoOfc"/><br/>
 		Email : <input type="text" name="email"/><br/>
-		OtherDetails : <input type="text" name="otherdetails"/><br/>
 		<input type="submit" value="Submit"/>
 	</form>
 </body>

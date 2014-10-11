@@ -31,57 +31,56 @@ public class DonorDAOImpl implements DonorDAO {
 
 	@Override
 	public Donor findDonarByName(String name) {
-		String query = "SELECT * FROM donorregistration where donorName = ?";
+		String query = "SELECT * FROM donor where name = ?";
 		Donor donor = getJdbcTemplate().queryForObject(query, new Object[] { name },
 				new RowMapper<Donor>() {
 
 					@Override
 					public Donor mapRow(ResultSet rs, int rowNum)
 							throws SQLException {
-						Donor donor = new Donor(rs.getString("donorName"), rs
-								.getString("donorAddress"), rs
-								.getString("donorCity"), rs
-								.getString("donorState"), rs
-								.getString("donorCountry"), rs
-								.getString("donorEmail"), rs
-								.getString("donorMobile"), rs
-								.getString("donorOtherDetails"));
-						donor.setId(rs.getInt("donorKey"));
-						// donor.setId(rs.getInt("donorKey"));
-						// donor.setName(rs.getString("donorName"));
-						// donor.setAddress(rs.getString("donorAddress"));
-						// donor.setCity(rs.getString("donorCity"));
-						// donor.setState(rs.getString("donorState"));
-						// donor.setCountry(rs.getString("donorCountry"));
-						// donor.setEmail(rs.getString("donorEmail"));
-						// donor.setMobile(rs.getString("donorMobile"));
-						// donor.setOtherDetails(rs.getString("donorOtherDetails"));
+						Donor donor = new Donor(rs.getString("name"),rs.getString("dob"),rs.getString("address"),rs.getString("phno_res"),rs.getString("phno_ofc"),rs.getString("mobile"),rs.getString("email"));
+						donor.setId(rs.getInt("id"));
 						return donor;
 					}
 				});
-
 		return donor;
 	}
 
 	@Override
 	public Donor save(final Donor donor) {
-		final String query = "INSERT INTO abhilasha.donorregistration(donorName, donorAddress, donorCity, donorState, donorCountry, donorEmail, donorMobile, donorOtherDetails) values(?,?,?,?,?,?,?,?)";
+		final String query = "INSERT INTO donor(name, dob, address, phno_res, phno_ofc, mobile, email) values(?, ?, ?, ?, ?, ?, ?)";
 		KeyHolder keyHolder = new GeneratedKeyHolder();		
 		getJdbcTemplate().update(new PreparedStatementCreator() {
 	        public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 	            PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 	            ps.setString(1, donor.getName());
-	            ps.setString(2, donor.getAddress());
-	            ps.setString(3, donor.getCity());
-	            ps.setString(4, donor.getState());
-	            ps.setString(5, donor.getCountry());
+	            ps.setString(2, donor.getDob());
+	            ps.setString(3, donor.getAddress());
+	            ps.setString(4, donor.getPhoneNoRes());
+	            ps.setString(5, donor.getPhoneNoOfc());
 	            ps.setString(6, donor.getMobile());
 	            ps.setString(7, donor.getEmail());
-	            ps.setString(8, donor.getOtherDetails());
 	            return ps;
 	        }
 	    }, keyHolder);
 		donor.setId(keyHolder.getKey().intValue());
+		return donor;
+	}
+
+	@Override
+	public Donor findDonarById(int id) {
+		String query = "SELECT * FROM donor where id = ?";
+		Donor donor = getJdbcTemplate().queryForObject(query, new Object[] { id },
+				new RowMapper<Donor>() {
+
+					@Override
+					public Donor mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						Donor donor = new Donor(rs.getString("name"),rs.getString("dob"),rs.getString("address"),rs.getString("phno_res"),rs.getString("phno_ofc"),rs.getString("mobile"),rs.getString("email"));
+						donor.setId(rs.getInt("id"));
+						return donor;
+					}
+				});
 		return donor;
 	}
 

@@ -7,8 +7,8 @@
 		<h1>Donor Registration</h1>
 		<p>&nbsp;</p>
 		<div id="intro">
-			<form class="pure-form pure-form-aligned" action="registerDonor"
-				method="POST">
+			<form class="pure-form pure-form-aligned" action="registerDonorAction"
+				method="POST" enctype="multipart/form-data">
 				<fieldset>
 					<div class="pure-control-group">
 						<label for="name">Name</label> <input name="name" type="text"
@@ -43,6 +43,11 @@
 					<div class="pure-control-group">
 						<label for="foo">Email</label> <input name="email" type="email"
 							placeholder="Email ID">
+					</div>
+					
+					<div class="pure-control-group">
+						<label for="foo">Profile Pic</label> <input name="photo" type="file"
+							placeholder="Choose Your Profile Pic">
 					</div>
 
 					<div class="pure-controls">

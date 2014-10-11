@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,7 +48,7 @@ public class HomeController {
 
 	@Autowired
 	ServletContext servletContext;
-	
+
 	@Autowired
 	DonorDAO donorDAO;
 
@@ -56,75 +57,79 @@ public class HomeController {
 
 	@Autowired
 	ChildNeedDAO childNeedDAO;
-	
+
 	@Autowired
 	DonationDAO donationDAO;
+
+	private String imageDir = "C:\\Users\\vijmkumar\\abhilasha\\abhilasha\\src\\main\\webapp\\resources\\dp\\";
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		return "donate";
 	}
-	
-	
+
 	@RequestMapping(value = "/makeDonation", method = RequestMethod.POST)
-	public String makeDonation(
-			HttpServletRequest request,
-			Model model) {
+	public String makeDonation(HttpServletRequest request, Model model) {
 		Enumeration<String> names = request.getParameterNames();
 		int donorId = Integer.parseInt(request.getParameter("donorid"));
-		int childId = Integer.parseInt(request.getParameter("childid"));;
+		int childId = Integer.parseInt(request.getParameter("childid"));
+		;
 		int amount = 0;
 		Date date = new Date();
 		ArrayList<Donation> needs = new ArrayList<Donation>();
-		while(names.hasMoreElements()) {
+		while (names.hasMoreElements()) {
 			String name = names.nextElement();
 			if (name.equals("donorid")) {
-				//do nothing
+				// do nothing
 			} else if (name.equals("childid")) {
-				//do nothing
+				// do nothing
 			} else if (name.equals("food")) {
 				if (request.getParameter("food") != "") {
-					    amount = Integer.parseInt(request.getParameter("food"));
-					} else {
-						amount = 0;
-					}
-				 needs.add(new Donation(donorId, childId, 1, date.toString(), amount));
+					amount = Integer.parseInt(request.getParameter("food"));
+				} else {
+					amount = 0;
+				}
+				needs.add(new Donation(donorId, childId, 1, date.toString(),
+						amount));
 			} else if (name.equals("clothing")) {
 				if (request.getParameter("clothing") != "") {
-				    amount = Integer.parseInt(request.getParameter("clothing"));
+					amount = Integer.parseInt(request.getParameter("clothing"));
 				} else {
 					amount = 0;
 				}
-				 needs.add(new Donation(donorId, childId, 4, date.toString(), amount));
+				needs.add(new Donation(donorId, childId, 4, date.toString(),
+						amount));
 			} else if (name.equals("medical")) {
 				if (request.getParameter("medical") != "") {
-				    amount = Integer.parseInt(request.getParameter("medical"));
+					amount = Integer.parseInt(request.getParameter("medical"));
 				} else {
 					amount = 0;
 				}
-				 needs.add(new Donation(donorId, childId, 3, date.toString(), amount));
+				needs.add(new Donation(donorId, childId, 3, date.toString(),
+						amount));
 			} else if (name.equals("education")) {
 				if (request.getParameter("education") != "") {
-				    amount = Integer.parseInt(request.getParameter("education"));
+					amount = Integer
+							.parseInt(request.getParameter("education"));
 				} else {
 					amount = 0;
 				}
-				 needs.add(new Donation(donorId, childId, 2, date.toString(), amount));
+				needs.add(new Donation(donorId, childId, 2, date.toString(),
+						amount));
 			} else {
-				//add to wish table
+				// add to wish table
 			}
 		}
 		for (int i = 0; i < needs.size(); i++) {
 			if (needs.get(i).getAmountdonated() > 0) {
-			Donation donation = donationDAO.save(needs.get(i));
-			System.out.println(donation.getId());
+				Donation donation = donationDAO.save(needs.get(i));
+				System.out.println(donation.getId());
 			}
 		}
 		return "donationSuccess";
 	}
-	
 
-	@RequestMapping(value = "/registerDonor", method = RequestMethod.POST)
+	@RequestMapping(value = "/registerDonorAction", method = RequestMethod.POST)
 	public String createDonor(
 			@RequestParam(value = "name", required = true) String name,
 			@RequestParam(value = "dob", required = true) String dob,
@@ -133,12 +138,17 @@ public class HomeController {
 			@RequestParam(value = "phNoOfc", required = true) String phNoOfc,
 			@RequestParam(value = "mobile", required = true) String mobile,
 			@RequestParam(value = "email", required = true) String email,
-
+			@RequestParam(value = "photo", required = false) MultipartFile file,
 			Model model) {
 		Donor donor = new Donor(name, dob, address, phNoRes, phNoOfc, mobile,
 				email);
 		donor = donorDAO.save(donor);
 		if (donor != null && donor.getId() > 0) {
+			if (!file.isEmpty()) {
+				saveImage(
+						"donor_" + donor.getId() + "."
+								+ getFileExt(file.getOriginalFilename()), file);
+			}
 			model.addAttribute(donor);
 			return "donorCreatedSuccess";
 		} else {
@@ -146,13 +156,13 @@ public class HomeController {
 		}
 	}
 
-	@RequestMapping(value = "/registerChild", method = RequestMethod.POST)
+	@RequestMapping(value = "/registerChildAction", method = RequestMethod.POST)
 	public String registerChild(
 			@RequestParam(value = "name", required = true) String name,
 			@RequestParam(value = "admissionNumber", required = true) String admissionNumber,
 			@RequestParam(value = "dob", required = true) String dob,
 			@RequestParam(value = "age", required = true) int age,
-			@RequestParam(value = "sex ", required = true) int sex,
+			@RequestParam(value = "sex", required = true) int sex,
 			@RequestParam(value = "std", required = true) String std,
 			@RequestParam(value = "fatherName", required = true) String fatherName,
 			@RequestParam(value = "fatherEducation", required = true) String fatherEducation,
@@ -160,8 +170,8 @@ public class HomeController {
 			@RequestParam(value = "motherName", required = true) String motherName,
 			@RequestParam(value = "motherEducation", required = true) String motherEducation,
 			@RequestParam(value = "motherEmployment", required = true) String motherEmployment,
-			@RequestParam(value = "familyHistroy", required = true) String familyHistroy,
-			@RequestParam(value = "addess", required = true) String addess,
+			@RequestParam(value = "familyHistory", required = true) String familyHistroy,
+			@RequestParam(value = "address", required = true) String addess,
 			@RequestParam(value = "familyIncome", required = true) int familyIncome,
 			@RequestParam(value = "category", required = true) String category,
 			@RequestParam(value = "hivInfection", required = true) int hivInfection,
@@ -170,48 +180,25 @@ public class HomeController {
 			@RequestParam(value = "academicPerformance", required = true) String academicPerformance,
 			@RequestParam(value = "dream", required = true) String dream,
 			@RequestParam(value = "schoolImpact", required = true) String schoolImpact,
+			@RequestParam(value = "photo", required = false) MultipartFile file,
 			Model model) {
 		Child child = new Child(name, admissionNumber, dob, age, sex, std,
 				fatherName, fatherEducation, fatherEmployment, motherName,
 				motherEducation, motherEmployment, familyHistroy, addess,
 				familyIncome, category, hivInfection, parentsHadhiv, conduct,
 				academicPerformance, dream, schoolImpact);
-		childDAO.save(child);
+		child = childDAO.save(child);
 		if (child != null && child.getId() > 0) {
+			if (!file.isEmpty()) {
+				saveImage(
+						"child_" + child.getId() + "."
+								+ getFileExt(file.getOriginalFilename()), file);
+			}
 			return "childCreatedSuccess";
 		} else {
 			return "childCreatedFail";
 		}
 	}
-	
-	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-	public boolean uploadFileHandler(@RequestParam("name") String name,
-			@RequestParam("file") MultipartFile file) {
-
-		if (!file.isEmpty()) {
-			try {
-				byte[] bytes = file.getBytes();
-
-				// Creating the directory to store file
-				String imagesStore = servletContext.getRealPath("/")
-						+ File.separator + "src" + File.separator + "main"
-						+ File.separator + "resources" + File.separator
-						+ "images";
-
-				// Create the file on server
-				File serverFile = new File(imagesStore + File.separator + name);
-				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(serverFile));
-				stream.write(bytes);
-				stream.close();
-				return true;
-			} catch (Exception e) {
-				return false;
-			}
-		}
-		return false;
-	}
-
 
 	@RequestMapping(value = "/getAllChildren", method = RequestMethod.GET)
 	public String getAllChildren(Model model) {
@@ -222,17 +209,45 @@ public class HomeController {
 		model.addAttribute("children", children);
 		return "displayChildren";
 	}
-	
-	@RequestMapping(value = "/donorRegister", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/registerDonor", method = RequestMethod.GET)
 	public String donorRegister() {
 		return "donorRegistration";
 	}
-	
+
 	@RequestMapping(value = "/childProfile", method = RequestMethod.GET)
 	public String childProfile(Model model) {
 		int childId = 1;
 		Child child = childDAO.findById(childId);
 		model.addAttribute("child", child);
 		return "childProfile";
+	}
+
+	@RequestMapping(value = "/registerChild", method = RequestMethod.GET)
+	public String childRegister() {
+		return "childRegistration";
+	}
+
+	private String getFileExt(String fileName) {
+		int i = fileName.lastIndexOf('.');
+		if (i > 0) {
+			return fileName.substring(i + 1);
+		}
+		return "";
+	}
+
+	private boolean saveImage(String name, MultipartFile file) {
+		try {
+			byte[] bytes = file.getBytes();
+			// Create the file on server
+			File serverFile = new File(imageDir + name);
+			BufferedOutputStream stream = new BufferedOutputStream(
+					new FileOutputStream(serverFile));
+			stream.write(bytes);
+			stream.close();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }

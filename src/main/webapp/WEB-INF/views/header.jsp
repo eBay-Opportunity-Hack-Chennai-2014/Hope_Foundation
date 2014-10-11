@@ -26,23 +26,16 @@
     <div class="navbar-header page-scroll">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse"> <i class="fa fa-bars"></i> </button>
       <a class="navbar-brand" href="index.html">
-      <h1>SQUAD FREE</h1>
+      <h1>Abhilasha --- Ray of Hope</h1>
       </a> </div>
     
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#intro">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#service">Service</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Example menu</a></li>
-            <li><a href="#">Example menu</a></li>
-            <li><a href="#">Example menu</a></li>
-          </ul>
-        </li>
+        <li class="active"><a href="#intro">Children</a></li>
+        <li><a href="#about">Donor</a></li>
+        <li><a href="#service">About Us</a></li>
+        <li><a href="#contact">Contact Detail</a></li>
       </ul>
     </div>
     <!-- /.navbar-collapse --> 

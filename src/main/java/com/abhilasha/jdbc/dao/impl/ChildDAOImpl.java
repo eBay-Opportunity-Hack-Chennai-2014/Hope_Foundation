@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
@@ -18,7 +19,6 @@ import org.springframework.stereotype.Component;
 
 import com.abhilasha.jdbc.dao.ChildDAO;
 import com.abhilasha.jdbc.model.Child;
-import com.abhilasha.jdbc.model.Donor;
 
 @Component
 public class ChildDAOImpl implements ChildDAO {
@@ -43,30 +43,7 @@ public class ChildDAOImpl implements ChildDAO {
 					@Override
 					public Child mapRow(ResultSet rs, int rowNum)
 							throws SQLException {
-						Child child = new Child(rs.getString("name"),
-								rs.getString("admissionNumber"),
-								rs.getString("dob"),
-								rs.getInt("age"),
-								rs.getInt("sex"),
-								rs.getString("std"),
-								rs.getString("fatherName"),
-								rs.getString("fatherEducation"),
-								rs.getString("fatherEmployment"),
-								rs.getString("motherName"),
-								rs.getString("motherEducation"),
-								rs.getString("motherEmployment"),
-								rs.getString("familyHistroy"),
-								rs.getString("addess"),
-								rs.getInt("familyIncome"),
-								rs.getString("category"),
-								rs.getInt("hivInfection"),
-								rs.getInt("parentsHadhiv"),
-								rs.getString("conduct"),
-								rs.getString("academicPerformance"),
-								rs.getString("dream"),
-								rs.getString("schoolImpact"));
-						child.setId(rs.getInt("id"));
-						return child;
+						return assembleChild(rs);
 					}
 				});
 		return child;
@@ -81,35 +58,30 @@ public class ChildDAOImpl implements ChildDAO {
 					@Override
 					public Child mapRow(ResultSet rs, int rowNum)
 							throws SQLException {
-						Child child = new Child(rs.getString("name"),
-								rs.getString("admissionNumber"),
-								rs.getString("dob"),
-								rs.getInt("age"),
-								rs.getInt("sex"),
-								rs.getString("std"),
-								rs.getString("fatherName"),
-								rs.getString("fatherEducation"),
-								rs.getString("fatherEmployment"),
-								rs.getString("motherName"),
-								rs.getString("motherEducation"),
-								rs.getString("motherEmployment"),
-								rs.getString("familyHistroy"),
-								rs.getString("addess"),
-								rs.getInt("familyIncome"),
-								rs.getString("category"),
-								rs.getInt("hivInfection"),
-								rs.getInt("parentsHadhiv"),
-								rs.getString("conduct"),
-								rs.getString("academicPerformance"),
-								rs.getString("dream"),
-								rs.getString("schoolImpact"));
-						child.setId(rs.getInt("id"));
-						return child;
+						return assembleChild(rs);
 					}
 				});
 		return child;
 	}
 
+	@Override
+	public ArrayList<Child> getAllChildren() {
+		String query = "SELECT * FROM child";
+		ArrayList<Child> children = getJdbcTemplate().queryForObject(query, new Object[] { },
+				new RowMapper<ArrayList<Child>>() {
+					@Override
+					public ArrayList<Child> mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						ArrayList<Child> children = new ArrayList<Child>();
+						while(rs.next()) {
+							children.add(assembleChild(rs));
+						}
+						return children;
+					}
+				});
+		return children;
+	}
+	
 	@Override
 	public Child save(final Child child) {
 		final String query = "INSERT INTO `abhilasha`.`child`(`admissionnumber`,`name`,`dob`,`age`,`sex`,`std`,`fathername`,`fathereducation`,`fatheremployment`,`mothername`,`mothereducation`,`motheremployment`,`familyhistory`,`address`,`familyincome`,`category`,`hivinfection`,`parentshadhiv`,`conduct`,`academicperformance`,`dream`,`schoolimpact`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
@@ -143,6 +115,38 @@ public class ChildDAOImpl implements ChildDAO {
 	        }
 	    }, keyHolder);
 		child.setId(keyHolder.getKey().intValue());
+		return child;
+	}
+	
+	private Child assembleChild(ResultSet rs) {
+		Child child = null;
+		try {
+			child = new Child(rs.getString("name"),
+					rs.getString("admissionnumber"),
+					rs.getString("dob"),
+					rs.getInt("age"),
+					rs.getInt("sex"),
+					rs.getString("std"),
+					rs.getString("fathername"),
+					rs.getString("fathereducation"),
+					rs.getString("fatheremployment"),
+					rs.getString("mothername"),
+					rs.getString("mothereducation"),
+					rs.getString("motheremployment"),
+					rs.getString("familyhistory"),
+					rs.getString("addess"),
+					rs.getInt("familyincome"),
+					rs.getString("category"),
+					rs.getInt("hivinfection"),
+					rs.getInt("parentshadhiv"),
+					rs.getString("conduct"),
+					rs.getString("academicperformance"),
+					rs.getString("dream"),
+					rs.getString("schoolimpact"));
+			child.setId(rs.getInt("id"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return child;
 	}
 	

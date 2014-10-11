@@ -1,6 +1,7 @@
 package com.abhilasha.api;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -96,5 +97,14 @@ public class HomeController {
 		} else {
 			return "childCreatedFail";
 		}
+	}
+	
+	@RequestMapping(value = "/getAllChildren", method = RequestMethod.GET)
+	public String getAllChildren() {
+		ArrayList<Child> children = childDAO.getAllChildren();
+		for (Child child : children) {
+			System.out.println(child.getName());
+		}
+		return null;
 	}
 }

@@ -69,7 +69,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		return "childRegistration";
+		return "index";
 	}
 
 	@RequestMapping(value = "/makeDonation", method = RequestMethod.POST)
@@ -247,6 +247,8 @@ public class HomeController {
 	public String donorRegister() {
 		return "donorRegistration";
 	}
+	
+	
 
 	@RequestMapping(value = "/childProfile", method = RequestMethod.GET)
 	public String childProfile(Model model) {
@@ -254,6 +256,14 @@ public class HomeController {
 		Child child = childDAO.findById(childId);
 		model.addAttribute("child", child);
 		return "childProfile";
+	}
+	
+	@RequestMapping(value = "/donorProfile", method = RequestMethod.GET)
+	public String donorProfile(Model model) {
+		int donorId = 1;
+		Donor donor = donorDAO.findDonarById(donorId);
+		model.addAttribute("donor", donor);
+		return "donorProfile";
 	}
 
 	@RequestMapping(value = "/registerChild", method = RequestMethod.GET)

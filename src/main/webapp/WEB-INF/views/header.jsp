@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Squadfree - Free bootstrap 3 one page template</title>
+<title>Abhilasha - Cherish The Child</title>
 <!-- Bootstrap Core CSS -->
 <link href="/api/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <!-- Fonts -->
@@ -15,6 +15,8 @@
 <!-- Squad theme CSS -->
 <link href="/api/resources/css/style.css" rel="stylesheet">
 <link href="/api/resources/color/default.css" rel="stylesheet">
+
+<script src="/api/resources/js/jquery.min.js"></script>
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
@@ -17,6 +18,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
 import com.abhilasha.jdbc.dao.DonorDAO;
+import com.abhilasha.jdbc.model.Child;
 import com.abhilasha.jdbc.model.Donor;
 
 @Component
@@ -85,6 +87,41 @@ public class DonorDAOImpl implements DonorDAO {
 						return donor;
 					}
 				});
+		return donor;
+	}
+
+	@Override
+	public ArrayList<Donor> getAllDonors() {
+		String query = "SELECT * FROM donor";
+		ArrayList<Donor> donors = getJdbcTemplate().queryForObject(query, new Object[] { },
+				new RowMapper<ArrayList<Donor>>() {
+					@Override
+					public ArrayList<Donor> mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						ArrayList<Donor> donors = new ArrayList<Donor>();
+						while(rs.next()) {
+							donors.add(assembleDonor(rs));
+						}
+						return donors;
+					}
+				});
+		return donors;
+	}
+
+	protected Donor assembleDonor(ResultSet rs) {
+		Donor donor = null;
+		try {
+			donor = new Donor(rs.getString("name"),
+					rs.getString("dob"),
+					rs.getString("address"),
+					rs.getString("phno_res"),
+					rs.getString("mobile"),
+					rs.getString("phno_ofc"),
+					rs.getString("email"));
+			donor.setId(rs.getInt("id"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return donor;
 	}
 

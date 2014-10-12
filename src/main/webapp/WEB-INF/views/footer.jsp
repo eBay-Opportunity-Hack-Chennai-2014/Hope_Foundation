@@ -12,7 +12,6 @@
 </footer>
 
 <!-- Core JavaScript Files --> 
-<script src="/api/resources/js/jquery.min.js"></script> 
 <script src="/api/resources/js/bootstrap.min.js"></script> 
 <script src="/api/resources/js/jquery.easing.min.js"></script> 
 <script src="/api/resources/js/jquery.scrollTo.js"></script> 

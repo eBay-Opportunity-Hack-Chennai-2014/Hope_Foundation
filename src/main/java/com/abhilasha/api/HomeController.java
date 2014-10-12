@@ -21,6 +21,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,6 +38,7 @@ import com.abhilasha.jdbc.model.Child;
 import com.abhilasha.jdbc.model.ChildNeed;
 import com.abhilasha.jdbc.model.Donation;
 import com.abhilasha.jdbc.model.Donor;
+import com.abhilasha.pojo.ChildNeedPojo;
 
 /**
  * Handles requests for the application home page.
@@ -69,15 +71,21 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
+		//return "index";
 		return "donate";
 	}
 
+	@RequestMapping(value = "/loginAction", method = RequestMethod.POST)
+	public String authorize(@RequestParam(value = "email", required = true) String email,
+			@RequestParam(value = "pwd", required = true) String pwd) {
+		return null;
+	}
+	
 	@RequestMapping(value = "/makeDonation", method = RequestMethod.POST)
 	public String makeDonation(HttpServletRequest request, Model model) {
 		Enumeration<String> names = request.getParameterNames();
 		int donorId = Integer.parseInt(request.getParameter("donorid"));
 		int childId = Integer.parseInt(request.getParameter("childid"));
-		;
 		int amount = 0;
 		Date date = new Date();
 		ArrayList<Donation> needs = new ArrayList<Donation>();
@@ -219,11 +227,22 @@ public class HomeController {
 		return "donorRegistration";
 	}
 
-	@RequestMapping(value = "/childProfile", method = RequestMethod.GET)
-	public String childProfile(Model model) {
-		int childId = 1;
+	@RequestMapping(value = "/childProfile/{childId}", method = RequestMethod.GET)
+	public String childProfile(@PathVariable("childId")int childId, Model model) {
 		Child child = childDAO.findById(childId);
 		model.addAttribute("child", child);
+		ChildNeed childNeed = childNeedDAO.findNeedByChildId(childId);
+		ArrayList<ChildNeedPojo> needPojoList = new ArrayList<ChildNeedPojo>();
+		if (childNeed != null) {
+			for (int needId : childNeed.getNeedid()) {
+				//System.out.println(needId);
+				int total = childBO.getTotalAmount(childId, needId);
+				int donated = childBO.getAmountDonatedTillNow(childId, needId);
+				int required = childBO.getRequiredAmount(childId, needId);
+				needPojoList.add(new ChildNeedPojo(childId, needId, total, donated, required));
+			}
+		}
+		model.addAttribute("needPojoList", needPojoList);
 		return "childProfile";
 	}
 

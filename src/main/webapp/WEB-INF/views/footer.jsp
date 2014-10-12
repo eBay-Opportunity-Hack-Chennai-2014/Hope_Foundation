@@ -12,12 +12,12 @@
 </footer>
 
 <!-- Core JavaScript Files --> 
-<script src="resources/js/jquery.min.js"></script> 
-<script src="resources/js/bootstrap.min.js"></script> 
-<script src="resources/js/jquery.easing.min.js"></script> 
-<script src="resources/js/jquery.scrollTo.js"></script> 
-<script src="resources/js/wow.min.js"></script> 
+<script src="/api/resources/js/jquery.min.js"></script> 
+<script src="/api/resources/js/bootstrap.min.js"></script> 
+<script src="/api/resources/js/jquery.easing.min.js"></script> 
+<script src="/api/resources/js/jquery.scrollTo.js"></script> 
+<script src="/api/resources/js/wow.min.js"></script> 
 <!-- Custom Theme JavaScript --> 
-<script src="resources/js/custom.js"></script>
+<script src="/api/resources/js/custom.js"></script>
 </body>
 </html>

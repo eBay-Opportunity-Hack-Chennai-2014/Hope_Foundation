@@ -1,3 +1,5 @@
+
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="header.jsp"></jsp:include>
          <link href="/api/resources/media/dataTables/demo_page.css" rel="stylesheet" type="text/css" />
@@ -16,9 +18,12 @@
             type="text/javascript"></script>
  	<div id="container" style="margin: 0 auto;width: 80%;margin-top: 80px;">
              <div id="demo_jui">
+             <a href="/api/registerDonor" class="myButton" style="width:30px height:10px">Register New Donor</a>
+             <br><br>
                  <table id="donortable" class="display">
                      <thead>
                          <tr>
+                  
                              <th>Name</th>
                               <th>Date of Birth</th>
                               <th>Address</th>
@@ -48,9 +53,20 @@
          $(document).ready(function () {
              $("#donortable").dataTable({
                  "sPaginationType": "full_numbers",
-                 "bJQueryUI": true
+                 "bJQueryUI": true,
              });
          });
          </script>
+         
+        <!--  <script>
+         $("#donortable tbody").delegate("tr", "click", function() {
+        	  var name = $("td:first", this).text();
+        	  alert('This is a click on a dynamic element' + firstCellText + fourthCellText);
+        	});
+         </script>  -->
+         
+<div style="height:300px">
+
+</div>
  <jsp:include page="footer1.jsp"></jsp:include>
  

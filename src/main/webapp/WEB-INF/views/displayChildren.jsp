@@ -59,4 +59,4 @@
 			<c:if test="${(loop.index+1) % 3 == 0}"></tr></c:if>
 	</c:forEach>
 </table>
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="footer1.jsp"></jsp:include>

@@ -35,9 +35,9 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#intro">Children</a></li>
-        <li><a href="#about">Donor</a></li>
-        <li><a href="#service">About Us</a></li>
+        <li class="active"><a href="/api/getAllChildren">Children</a></li>
+        <li><a href="/api/getAllDonors">Donor</a></li>
+        <li><a href="#about">About Us</a></li>
         <li><a href="#contact">Contact Detail</a></li>
       </ul>
     </div>

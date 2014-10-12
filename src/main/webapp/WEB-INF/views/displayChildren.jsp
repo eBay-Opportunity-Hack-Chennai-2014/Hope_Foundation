@@ -11,7 +11,7 @@
 								<tr>
 									<td width="150px" height="200px" align="center">
 										<div class="avatar">
-											<img src="/api/resources/img/team/1.jpg" alt=""
+											<img src="/api/resources/dp/child_${child.getId()}.jpg" alt=""
 												class="img-responsive img-circle" width="100" />
 										</div>
 									</td>

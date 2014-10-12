@@ -37,25 +37,29 @@ public class ChildNeedDAOImpl implements ChildNeedDAO {
 	}
 
 	@Override
-	public ChildNeed findNeedByChildId(int childId) {
-		String query = "SELECT * FROM child_need where childid = ?";
-		ChildNeed childNeed = getJdbcTemplate().queryForObject(query,
+	public ChildNeed findNeedByChildId(final int childId) {
+		String query = "SELECT needid FROM child_need where childid = ?";
+		ChildNeed childNeed = null;
+		try {
+		childNeed = getJdbcTemplate().queryForObject(query,
 				new Object[] { childId }, new RowMapper<ChildNeed>() {
 
 					@Override
 					public ChildNeed mapRow(ResultSet rs, int rowNum)
 							throws SQLException {
-						ChildNeed childNeed = new ChildNeed(rs
-								.getInt("childid"));
+						ChildNeed childNeed = new ChildNeed(childId);
 						ArrayList<Integer> needids = new ArrayList<Integer>();
 						while (rs.next()) {
 							needids.add(rs.getInt("needid"));
 						}
+						//System.out.println("size : "+needids.size());
 						childNeed.setNeedid(needids);
 						return childNeed;
 					}
 				});
-
+		} catch(Exception e) {
+			
+		}
 		return childNeed;
 	}
 

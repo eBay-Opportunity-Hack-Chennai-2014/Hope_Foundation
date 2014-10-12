@@ -1,6 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="header.jsp"></jsp:include>
 
-<link rel="stylesheet" href="resources/css/pure-min.css">
+<link rel="stylesheet" href="/api/resources/css/pure-min.css">
 <style>
 	table {
 		margin: 10px auto;
@@ -25,7 +26,7 @@
 		<div id="childDetails">
 		<table>
 			<tr>
-				<td><img alt="child_photo" src="resources/img/team/1.jpg"></td>
+				<td><img alt="child_photo" src="/api/resources/img/team/1.jpg"></td>
 				<td>
 					<table>
 						<tr><td>
@@ -64,6 +65,34 @@
 				</td>
 			</tr>
 		</table>
+		<hr/>
+		<form action="/api/makeDonation" method="POST">
+			 <input name="donorid" value="1" type="hidden">
+       		 <input name="childid" value="${child.getId()}" type="hidden">
+			<table>
+				<tr>
+					<td  style="border-right: 1px solid #ddd; visibility: hidden;"><label>NEEDS</label></td>
+					<td><h3 style="position: relative;right: 200px;"> NEEDS</h3></td>
+				</tr>
+				<tr>
+					<td  style="border-right: 1px solid #ddd; visibility: hidden;">
+						<table>
+							<tr><td></td><td>Amount Donated</td><td>Amount Required</td><td></td></tr>
+							<tr><td><label>Food</label></td><td>400</td><td>600</td><td><input type="text" name="" /></td></tr>
+						</table>
+					</td>
+					<td>
+						<table>
+							<tr><td></td><td><label>Amount Donated</label></td><td><label>Amount Required</label></td><td></td></tr>
+							<c:forEach var="needpojo" items="${needPojoList}">
+								<tr><td><label>${needpojo.getNeedType()}</label></td><td>${needpojo.getAmountDonated()}</td><td>${needpojo.getRequiredAmount()}</td><td><input type="text" name="${needpojo.getNeedType().toLowerCase()}" /></td></tr>
+							</c:forEach>
+						</table>
+					</td>
+				</tr>
+			</table>
+			<input type="submit" class="pure-button pure-button-primary" style="margin-left: 960px;margin-bottom: 10px;" name="Donate">
+		</form>
 </div>
 </div>
 

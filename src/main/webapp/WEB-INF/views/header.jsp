@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,15 +8,15 @@
 <meta name="author" content="">
 <title>ABHILASHA - RAY OF HOPE</title>
 <!-- Bootstrap Core CSS -->
-<link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="/api/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <!-- Fonts -->
-<link href="resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link href="resources/css/animate.css" rel="stylesheet" />
+<link href="/api/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="/api/resources/css/animate.css" rel="stylesheet" />
 <!-- Squad theme CSS -->
-<link href="resources/css/style.css" rel="stylesheet">
-<link href="resources/color/default.css" rel="stylesheet">
+<link href="/api/resources/css/style.css" rel="stylesheet">
+<link href="/api/resources/color/default.css" rel="stylesheet">
 
-<script src="resources/js/jquery.min.js"></script>
+<script src="/api/resources/js/jquery.min.js"></script>
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">

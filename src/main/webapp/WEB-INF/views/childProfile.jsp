@@ -71,14 +71,14 @@
        		 <input name="childid" value="${child.getId()}" type="hidden">
 			<table>
 				<tr>
-					<td  style="border-right: 1px solid #ddd; visibility: hidden;"><label>NEEDS</label></td>
+					<td><h3 style="position: relative;right: 200px;"> WISH</h3></td>
 					<td><h3 style="position: relative;right: 200px;"> NEEDS</h3></td>
 				</tr>
 				<tr>
-					<td  style="border-right: 1px solid #ddd; visibility: hidden;">
+					<td  style="border-right: 1px solid #ddd;">
 						<table>
-							<tr><td></td><td>Amount Donated</td><td>Amount Required</td><td></td></tr>
-							<tr><td><label>Food</label></td><td>400</td><td>600</td><td><input type="text" name="" /></td></tr>
+							<tr><td><label>Description</label></td><td><label>Amount Donated</label></td><td></td><td></td></tr>
+							<tr><td>I would like to have a remote control robot and Diwali Dress</td><td>200</<td><td><input type="text" name="" /></td></tr>
 						</table>
 					</td>
 					<td>

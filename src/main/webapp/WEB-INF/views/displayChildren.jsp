@@ -1,6 +1,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="header.jsp"></jsp:include>
+
+
+<div style="width: 130px;
+height: 32px;
+position: relative;
+padding: 5px;
+z-index: 10000000000000000;
+top: 6%;
+left: 18%;
+border: 1px solid #aaa;
+border-radius: 5px;
+background: rgb(58, 142, 182);">
+<div style="top-margin: 150px" class="color:#fff"><a href="/api/registerChild" style="width:30px height:10px;color:#fff">Register New Child</a></div>
+</div>
 <table align="center" style="margin-top: 70px">
+
 		<c:forEach var="child" items="${children}" varStatus="loop">
 			<c:if test="${loop.index % 3 == 0}"><tr></c:if>
 			<td width="30%" style="padding: 15px;">
@@ -58,4 +73,5 @@
 			<c:if test="${(loop.index+1) % 3 == 0}"></tr></c:if>
 	</c:forEach>
 </table>
+
 <jsp:include page="footer1.jsp"></jsp:include>

@@ -18,7 +18,17 @@
             type="text/javascript"></script>
  	<div id="container" style="margin: 0 auto;width: 80%;margin-top: 80px;">
              <div id="demo_jui">
-             <a href="/api/registerDonor" class="myButton" style="width:30px height:10px">Register New Donor</a>
+             <a href="/api/registerDonor"              style="width: 130px;
+height: 32px;
+position: relative;
+padding: 5px;
+z-index: 10000000000000000;
+top: 10%;
+left: 0%;
+border: 1px solid #aaa;
+border-radius: 5px;
+color: #fff;
+background: rgb(58, 142, 182);">Register New Donor</a>
              <br><br>
                  <table id="donortable" class="display">
                      <thead>

@@ -142,6 +142,14 @@
 							name="schoolImpact" type="text"
 							placeholder="Impact of School children">
 					</div>
+					
+					<div class="pure-control-group">
+						<label for="Needs">Select Child Needs</label><br>
+						 <label>Food</label> <input type="checkbox" name="food" value="1"><br>
+						<label>Education</label> <input type="checkbox" name="education" value="2"><br>
+						<label>Medical</label> <input type="checkbox" name="medical" value="3"><br>
+						<label>Clothing</label> <input type="checkbox" name="clothing" value="4">
+					</div>
 
 					<div class="pure-control-group">
 						<label for="foo">Profile Pic</label> <input name="photo" type="file"
@@ -159,11 +167,4 @@
 		</div>
 	</div>
 </section>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
-
 <jsp:include page="footer.jsp"></jsp:include>

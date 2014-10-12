@@ -69,7 +69,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		return "donate";
+		return "childRegistration";
 	}
 
 	@RequestMapping(value = "/makeDonation", method = RequestMethod.POST)
@@ -184,8 +184,25 @@ public class HomeController {
 			@RequestParam(value = "academicPerformance", required = true) String academicPerformance,
 			@RequestParam(value = "dream", required = true) String dream,
 			@RequestParam(value = "schoolImpact", required = true) String schoolImpact,
+			@RequestParam(value = "food", required = false) Integer food,
+			@RequestParam(value = "education", required = false) Integer education,
+			@RequestParam(value = "medical", required = false) Integer medical,
+			@RequestParam(value = "clothing", required = false) Integer clothing,
 			@RequestParam(value = "photo", required = false) MultipartFile file,
 			Model model) {
+		ArrayList<Integer> needs = new ArrayList<Integer>();
+		if (food != null) {
+			needs.add(food);
+		}
+		if (education != null) {
+			needs.add(education);
+		}
+		if (medical != null) {
+			needs.add(medical);
+		}
+		if (clothing != null) {
+			needs.add(clothing);
+		}
 		Child child = new Child(name, admissionNumber, dob, age, sex, std,
 				fatherName, fatherEducation, fatherEmployment, motherName,
 				motherEducation, motherEmployment, familyHistroy, addess,
@@ -198,6 +215,8 @@ public class HomeController {
 						"child_" + child.getId() + "."
 								+ getFileExt(file.getOriginalFilename()), file);
 			}
+			ChildNeed childNeed = new ChildNeed(child.getId(), needs);
+			childNeedDAO.save(childNeed);
 			return "childCreatedSuccess";
 		} else {
 			return "childCreatedFail";

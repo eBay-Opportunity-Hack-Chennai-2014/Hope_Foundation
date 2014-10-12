@@ -26,7 +26,7 @@
 		<div id="childDetails">
 		<table>
 			<tr>
-				<td><img alt="child_photo" src="/api/resources/img/team/1.jpg"></td>
+				<td><img alt="child_photo" src="/api/resources/dp/child_${child.getId()}.jpg"></td>
 				<td>
 					<table>
 						<tr><td>

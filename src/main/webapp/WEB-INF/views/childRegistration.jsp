@@ -150,10 +150,15 @@
 						<label>Medical</label> <input type="checkbox" name="medical" value="3"><br>
 						<label>Clothing</label> <input type="checkbox" name="clothing" value="4">
 					</div>
+					
+					<div class="pure-control-group">
+						<label for="Wish">Wish </label>
+						<textarea name="wish" rows="3" cols="50"></textarea>
+					</div>
 
 					<div class="pure-control-group">
-						<label for="foo">Profile Pic</label> <input name="photo" type="file"
-							placeholder="Choose Your Profile Pic">
+						<label for="foo">Photo of Child</label> <input name="photo" type="file"
+							placeholder="Choose Pic of Child">
 					</div>
 
 					<div class="pure-controls">

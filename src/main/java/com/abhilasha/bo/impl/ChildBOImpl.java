@@ -45,17 +45,22 @@ public class ChildBOImpl implements ChildBO {
 	@Override
 	public int getTotalAmount(int childid, int needid) {
 		String query = "SELECT amount FROM need where id = ?";
-		Integer i = getJdbcTemplate().queryForObject(query, new Object[] { needid },
-				new RowMapper<Integer>() {
-
-					@Override
-					public Integer mapRow(ResultSet rs, int rowNum)
-							throws SQLException {
-							return (12 * rs.getInt("amount"));
-					}
-					
-				});
-		return i;
+		try {
+			Integer i = getJdbcTemplate().queryForObject(query, new Object[] { needid },
+					new RowMapper<Integer>() {
+	
+						@Override
+						public Integer mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+								return (12 * rs.getInt("amount"));
+						}
+						
+					});
+			return i;
+		} catch(Exception e) {
+			
+		}
+		return 0;
 	}
 
 	@Override

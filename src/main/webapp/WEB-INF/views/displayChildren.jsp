@@ -11,7 +11,7 @@
 								<tr>
 									<td width="150px" height="200px" align="center">
 										<div class="avatar">
-											<img src="/api/resources/img/team/1.jpg" alt=""
+											<img src="/api/resources/dp/child_${child.getId()}.jpg" alt=""
 												class="img-responsive img-circle" width="100" />
 										</div>
 									</td>
@@ -40,8 +40,7 @@
 															${child.getCategory()}</label></td>
 												</tr>
 												<tr>
-													<td><label>Wish : </label><label id="Wish"> I
-															want to become doctor</label></td>
+													<td><label>Wish : </label><label id="Wish">${wishes.get(loop.index)}</label></td>
 												</tr>
 												<tr>
 													<td align="right"><a href="/api/childProfile/<c:out value='${child.getId()}'/>"> More

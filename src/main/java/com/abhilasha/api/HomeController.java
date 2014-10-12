@@ -32,12 +32,14 @@ import com.abhilasha.jdbc.dao.ChildDAO;
 import com.abhilasha.jdbc.dao.ChildNeedDAO;
 import com.abhilasha.jdbc.dao.DonationDAO;
 import com.abhilasha.jdbc.dao.DonorDAO;
+import com.abhilasha.jdbc.dao.WishDAO;
 import com.abhilasha.jdbc.dao.impl.ChildDAOImpl;
 import com.abhilasha.jdbc.dao.impl.DonationDAOImpl;
 import com.abhilasha.jdbc.model.Child;
 import com.abhilasha.jdbc.model.ChildNeed;
 import com.abhilasha.jdbc.model.Donation;
 import com.abhilasha.jdbc.model.Donor;
+import com.abhilasha.jdbc.model.Wish;
 import com.abhilasha.pojo.ChildNeedPojo;
 
 /**
@@ -66,6 +68,9 @@ public class HomeController {
 
 	@Autowired
 	DonationDAO donationDAO;
+	
+	@Autowired
+	WishDAO wishDAO;
 
 	private String imageDir = "C:\\Users\\vijmkumar\\abhilasha\\abhilasha\\src\\main\\webapp\\resources\\dp\\";
 
@@ -195,6 +200,7 @@ public class HomeController {
 			@RequestParam(value = "education", required = false) Integer education,
 			@RequestParam(value = "medical", required = false) Integer medical,
 			@RequestParam(value = "clothing", required = false) Integer clothing,
+			@RequestParam(value = "wish", required = false) String wish, 
 			@RequestParam(value = "photo", required = false) MultipartFile file,
 			Model model) {
 		ArrayList<Integer> needs = new ArrayList<Integer>();
@@ -210,6 +216,7 @@ public class HomeController {
 		if (clothing != null) {
 			needs.add(clothing);
 		}
+		System.out.println(wish);
 		Child child = new Child(name, admissionNumber, dob, age, sex, std,
 				fatherName, fatherEducation, fatherEmployment, motherName,
 				motherEducation, motherEmployment, familyHistroy, addess,
@@ -224,6 +231,11 @@ public class HomeController {
 			}
 			ChildNeed childNeed = new ChildNeed(child.getId(), needs);
 			childNeedDAO.save(childNeed);
+			Wish wish1 = new Wish();
+			wish1.setChildId(child.getId());
+			wish1.setDonatedAmount(0);
+			wish1.setWish(wish);
+			wishDAO.save(wish1);
 			return "childCreatedSuccess";
 		} else {
 			return "childCreatedFail";
@@ -233,10 +245,18 @@ public class HomeController {
 	@RequestMapping(value = "/getAllChildren", method = RequestMethod.GET)
 	public String getAllChildren(Model model) {
 		ArrayList<Child> children = childDAO.getAllChildren();
+		ArrayList<String> wishes = new ArrayList<String>();
 		for (Child child : children) {
-			System.out.println(child.getName());
+			Wish w = wishDAO.findWishByChildId(child.getId());
+			if (w != null) {
+				wishes.add(w.getWish());
+				System.out.println(child.getName() + "\t" + wishDAO.findWishByChildId(child.getId()).getWish());
+			} else {
+				wishes.add(null);
+			}
 		}
 		model.addAttribute("children", children);
+		model.addAttribute("wishes", wishes);
 		return "displayChildren";
 	}
 	

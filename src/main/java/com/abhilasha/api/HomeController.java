@@ -232,6 +232,16 @@ public class HomeController {
 		model.addAttribute("children", children);
 		return "displayChildren";
 	}
+	
+	@RequestMapping(value = "/getAllDonors", method = RequestMethod.GET)
+	public String getAllDonors(Model model) {
+		ArrayList<Donor> donors = donorDAO.getAllDonors();
+		for (Donor donor : donors) {
+			System.out.println(donor.getName());
+		}
+		model.addAttribute("donors", donors);
+		return "displayAllDonorsTabular";
+	}
 
 	@RequestMapping(value = "/registerDonor", method = RequestMethod.GET)
 	public String donorRegister() {

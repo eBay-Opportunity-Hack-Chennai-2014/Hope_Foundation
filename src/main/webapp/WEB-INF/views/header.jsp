@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Abhilasha - Cherish The Child</title>
+<title>ABHILASHA - RAY OF HOPE</title>
 <!-- Bootstrap Core CSS -->
 <link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <!-- Fonts -->
@@ -27,8 +27,8 @@
   <div class="container">
     <div class="navbar-header page-scroll">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse"> <i class="fa fa-bars"></i> </button>
-      <a class="navbar-brand" href="index.html">
-      <h1>Abhilasha --- Ray of Hope</h1>
+      <a class="navbar-brand" href="/api">
+      <h1>ABHILASHA - RAY OF HOPE</h1>
       </a> </div>
     
     <!-- Collect the nav links, forms, and other content for toggling -->

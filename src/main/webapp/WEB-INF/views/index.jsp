@@ -10,9 +10,9 @@ function focusFunction() {
 <section id="intro" class="intro" onMouseOver="focusFunction()" >
   <div class="slogan">
     <h2>WELCOME TO ABHILASHA</span></h2>
-    <h4>A Ray of Hope</h4>
+    <h4>Ray of Hope</h4>
   </div>
-  <div class="page-scroll"> <a href="#service" class="btn btn-circle"> <i class="fa fa-angle-double-down animated"></i> </a> </div>
+  <div class="page-scroll"> <a href="#about" class="btn btn-circle"> <i class="fa fa-angle-double-down animated"></i> </a> </div>
 </section>
 <!-- /Section: intro --> 
 
